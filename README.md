@@ -1,3 +1,4 @@
-# Chatty
+# Chatty - Server
 
-iOS messenger app that allows users to create an account, sign in, add friends, post messages, and view messages on a feed.
+Server side of the iOS Chatty app. 
+Stack: NodeJS, ExpressJS, ReactJS, JQuery, Sequelize, CSS
