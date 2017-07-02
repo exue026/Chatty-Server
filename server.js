@@ -1,11 +1,11 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+import express from 'express';
+import path from 'path';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
-var api = require('./routes/api');
-var controllers = require('./routes/controllers');
+import api from './routes/api'
+import controllers from './routes/controllers';
 
 var app = express();
 var hostname = 'localhost';
@@ -27,24 +27,25 @@ app.use('/controllers', controllers);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    let err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
 app.use((err, req, res, next) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    console.log(err);    
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.send(err.message);
+    // render the error page
+    res.status(err.status || 500);
+    res.send(`<html><h1>${err.message}</h1></html>`);
 });
 
 app.listen(port, hostname, () => {
     console.log('Server running at http://' + hostname + ':' + port);
 });
 
-module.exports = app;
+export default app;
