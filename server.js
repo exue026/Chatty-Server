@@ -7,6 +7,9 @@ import bodyParser from 'body-parser';
 import api from './routes/api'
 import controllers from './routes/controllers';
 
+import dbManager from './util/database';
+import devices from './models/devices';
+
 var app = express();
 var hostname = 'localhost';
 var port = process.env.PORT || 8080;
