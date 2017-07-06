@@ -1,13 +1,13 @@
 import dbManager from '../util/database';
 
 const create = () => {
-    let sql = "";
+    let sql = "INSERT INTO devices (created_at) VALUES (NOW())";
     dbManager.query(sql, (error, result, fields) => {
         if (error) {
             console.log(error.message); 
         } 
         else {
-            console.log(results); 
+            console.log(result); 
         }
     })
 }
@@ -19,7 +19,7 @@ const getForId = (userId) => {
             console.log(error.message); 
         } 
         else {
-            return fields; 
+            return result; 
         }
     })
 }

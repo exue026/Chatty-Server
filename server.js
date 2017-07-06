@@ -7,8 +7,9 @@ import bodyParser from 'body-parser';
 import api from './routes/api'
 import controllers from './routes/controllers';
 
-import dbManager from './util/database';
 import devices from './models/devices';
+import users from './models/users';
+
 
 var app = express();
 var hostname = 'localhost';
@@ -27,6 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 app.use('/api', api);
 app.use('/controllers', controllers);
+
+users.getForId(1).then((res) => {
+    console.log(res);
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
