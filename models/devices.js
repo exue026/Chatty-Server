@@ -13,15 +13,8 @@ const create = () => {
 }
 
 const getForId = (userId) => {
-    let sql = "SELECT * FROM devices WHERE id = `${userId}`";
-    dbManager.query(sql, (error, result, fields) => {
-        if (error) {
-            console.log(error.message); 
-        } 
-        else {
-            return result; 
-        }
-    })
+    let sql = "SELECT * FROM devices WHERE id = " + userId.toString();
+    return dbManager.query(sql);
 }
 
 export default {

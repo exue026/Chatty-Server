@@ -10,7 +10,6 @@ import controllers from './routes/controllers';
 import devices from './models/devices';
 import users from './models/users';
 
-
 var app = express();
 var hostname = 'localhost';
 var port = process.env.PORT || 8080;
@@ -29,8 +28,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', api);
 app.use('/controllers', controllers);
 
+//-------------> TESTINIG
+devices.getForId(1).then((res) => {
+    console.log(res[0].id);
+});
 users.getForId(1).then((res) => {
-    console.log(res);
+    console.log(res[0].id);
 });
 
 // catch 404 and forward to error handler
