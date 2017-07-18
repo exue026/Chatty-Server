@@ -6,7 +6,7 @@ var pool = mysql.createPool({
     user: config.database.user,
     password: config.database.pass,
     database: config.database.name,
-    connectionLimit: 15
+    connectionLimit: config.database.numConnections
 });
 
 const query = (queryString) => {

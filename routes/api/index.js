@@ -1,8 +1,11 @@
-var express = require('express');
-var devices = require('./devices');
+import express from 'express';
+
+import devices from './devices';
+import users from './users';
 
 var router = express.Router();
 
 router.use('/devices', devices);
+router.use('/users', users);
 
-module.exports = router;
+export default router;
