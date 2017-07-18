@@ -4,7 +4,7 @@ Server side component of the iOS Chatty app. <br/>
 Stack: NodeJS, ExpressJS, ReactJS, JQuery, Sequelize, CSS. <br/>
 
 
-##Run Locally
+## Run Locally
 
 ```
 git clone  
