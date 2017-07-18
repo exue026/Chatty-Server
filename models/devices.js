@@ -12,6 +12,6 @@ const getForId = (userId) => {
 
 export default {
     create,   
-    getForId,
+    getForId
 };
 
