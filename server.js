@@ -7,13 +7,13 @@ import bodyParser from 'body-parser';
 import api from './routes/api'
 import controllers from './routes/controllers';
 
+import config from './config';
 import devices from './models/devices';
 import users from './models/users';
 
-
 var app = express();
-var hostname = 'localhost';
-var port = process.env.PORT || 8080;
+var hostname = config.host;
+var port = config.port;
 
 // debug messages in the console
 app.use(logger('dev'));
@@ -29,8 +29,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', api);
 app.use('/controllers', controllers);
 
-users.getForId(1).then((res) => {
-    console.log(res);
+//-------------> TESTINIG
+devices.getForId(1).then((res) => {
+    console.log(res[0].created_at);
+    return users.getForId(1);
+}).then((res) => {
+    console.log(res[0].firstname);
 });
 
 // catch 404 and forward to error handler
