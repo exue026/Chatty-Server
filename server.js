@@ -8,8 +8,6 @@ import api from './routes/api'
 import controllers from './routes/controllers';
 
 import config from './config';
-import devices from './models/devices';
-import users from './models/users';
 
 var app = express();
 var hostname = config.host;
@@ -30,12 +28,6 @@ app.use('/api', api);
 app.use('/controllers', controllers);
 
 //-------------> TESTINIG
-devices.getForId(1).then((res) => {
-    console.log(res[0].created_at);
-    return users.getForId(1);
-}).then((res) => {
-    console.log(res[0].firstname);
-});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
