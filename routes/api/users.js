@@ -1,5 +1,6 @@
 import express from 'express';
 import users from '../../models/users';
+import firebaseAdmin from '../../util/firebase';
 
 var router = express.Router();
 
@@ -9,6 +10,11 @@ router.get('/', (req, res, next) => {
         let user = result[0];
         res.end(JSON.stringify(user));
     });
+});
+
+router.post('/idTokens/:idToken', (req, res, next) => {
+    firebaseAdmin.decodeIdToken(req.params.idToken)
+    res.end();
 });
 
 export default router;
