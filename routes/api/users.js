@@ -12,8 +12,8 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/idTokens/:idToken', (req, res, next) => {
-    firebaseAdmin.decodeIdToken(req.params.idToken)
+router.post('/idTokens/:id', (req, res, next) => {
+    firebaseAdmin.decodeIdToken(req.params.id)
     res.end();
 });
 

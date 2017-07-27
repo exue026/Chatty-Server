@@ -9,5 +9,6 @@ export default {
         numConnections: process.env.DB_NUM_CONNS || 15
     },
     firebase_priv_key_path: '/config/firebase-private-key.json',
-    firebase_db_url: process.env.FIREBASE_DB_URL || 'https://chatty-428c3.firebaseio.com'
+    firebase_db_url: process.env.FIREBASE_DB_URL || 'https://chatty-428c3.firebaseio.com',
+    firebase_db_main_dir: process.env.FIREBASE_DB_MAIN_DIR || 'Users'
 };

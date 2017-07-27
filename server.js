@@ -27,8 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', api);
 app.use('/controllers', controllers);
 
-//-------------> TESTINIG
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
     let err = new Error('Not Found');
