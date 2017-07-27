@@ -1,7 +1,7 @@
 import dbManager from '../util/database';
 
-const create = () => {
-    let sql = "INSERT INTO devices (created_at) VALUES (NOW())";
+const create = (uid, username) => {
+    let sql = "";
     return dbManager.query(sql)
 }
 
