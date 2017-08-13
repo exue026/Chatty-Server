@@ -1,20 +1,32 @@
-import express from 'express';
-import users from '../../models/users';
-import firebaseAdmin from '../../util/firebase';
+import Express from 'express';
+import Users from '../../models/users';
+import FirebaseAdmin from '../../util/firebase';
 
-var router = express.Router();
+var router = Express.Router();
 
 router.get('/', (req, res, next) => {
     res.writeHead(200, { 'Content-Type': 'application/json' }); 
-    users.getForId(1).then((result) => {
+    Users.getForId(1).then((result) => {
         let user = result[0];
         res.end(JSON.stringify(user));
     });
 });
 
-router.post('/idTokens/:id', (req, res, next) => {
-    firebaseAdmin.decodeIdToken(req.params.id)
-    res.end();
+router.get('/idTokens/:id', (req, res, next) => {
+    FirebaseAdmin.decodeIdToken(req.params.id).then((uid) => {
+   		return Users.getForUid(uid); 
+    }).then((result) => {
+   		let user = result[0];	
+   		res.json(user);
+   	}).catch((error) => {
+   		next(error);	
+   	})
+});
+
+router.put('/:id/updateInfo', (req, res, next) => {
+	Users.updateNameForId(req.params.id, req.body.name).then((result) => {
+		res.status(200).end();
+	})
 });
 
 export default router;

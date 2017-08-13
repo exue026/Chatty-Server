@@ -10,12 +10,12 @@ admin.initializeApp({
   databaseURL: config.firebase_db_url
 });
 
-var usersRef = admin.database().ref("Users");
+var usersRef = admin.database().ref(config.firebase_db_main_dir);
 
 usersRef.on("child_added", (snapshot, prevChildUid) => {
     let uid = snapshot.key;
     let newUser = snapshot.val();
-    console.log("CREATED:\n");
+    console.log("CREATED:");
     console.log(uid);
     console.log(newUser);
     users.create(uid, newUser.username);
@@ -24,7 +24,7 @@ usersRef.on("child_added", (snapshot, prevChildUid) => {
 usersRef.on("child_changed", (snapshot) => {
     let uid = snapshot.key;
     let alteredUser = snapshot.val();
-    console.log("UPDATED:\n");
+    console.log("UPDATED:");
     console.log(uid);
     console.log(alteredUser);
     users.updateForUid(uid, alteredUser.firstname, alteredUser.lastname, alteredUser.description);
@@ -33,21 +33,22 @@ usersRef.on("child_changed", (snapshot) => {
 usersRef.on("child_removed", (snapshot) => {
     let uid = snapshot.key;
     let removedUser = snapshot.val();
-    console.log("REMOVED:\n");
+    console.log("REMOVED:");
     console.log(uid);
     console.log(removedUser);
     users.removeForUid(uid);
 });
 
 const decodeIdToken = (idToken) => {
-    admin.auth().verifyIdToken(idToken)
-    .then((decodedToken) => {
-        let uid = decodedToken.uid; 
-        console.log(uid);
-        return uid;
-    }).catch((error) => {
-        console.log(error); 
-    });
+	return new Promise((resolve, reject) => {
+		admin.auth().verifyIdToken(idToken)
+    	.then((decodedToken) => {
+        	let uid = decodedToken.uid; 
+        	resolve(uid);
+    	}).catch((error) => {
+        	reject(error);
+    	});
+	});
 };
 
 export default {

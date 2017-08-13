@@ -1,7 +1,7 @@
 import dbManager from '../util/database';
 
 const create = (uid, username) => {
-    let sql = `INSERT IGNORE INTO users (username, uid, created_at, updated_at) VALUES ('${username}', '${uid}', NOW(), NOW())`;
+    let sql = `INSERT IGNORE INTO users (username, uid, name, created_at, updated_at) VALUES ('${username}', '${uid}', '${username}', NOW(), NOW())`;
     return dbManager.query(sql);
 }
 
@@ -15,13 +15,13 @@ const getForUid = (uid) => {
     return dbManager.query(sql);
 }
 
-const updateForUid = (uid, firstname, lastname, description) => {
-    let sql = `UPDATE users SET firstname = '${firstname}', lastname = '${lastname}', description = '${description}', updated_at = NOW() WHERE uid = '${uid}'`; 
+const updateNameForUid = (uid, name) => {
+    let sql = `UPDATE users SET name = '${name}', updated_at = NOW() WHERE uid = '${uid}'`; 
     return dbManager.query(sql);
 }
 
-const updateForId = (userId, firstname, lastname, description) => {
-    let sql = `UPDATE users SET firstname = '${firstname}', lastname = '${lastname}', description = '${description}', updated_at = NOW() WHERE uid = '${userId}'`; 
+const updateNameForId = (userId, name) => {
+	let sql = `UPDATE users SET name = '${name}', updated_at = NOW() WHERE id = '${userId}'`; 
     return dbManager.query(sql);
 }
 
@@ -34,7 +34,7 @@ export default {
     create,
     getForId,
     getForUid,
-    updateForId,
-    updateForUid,
+    updateNameForId,
+    updateNameForUid,
     removeForUid
 };
