@@ -23,10 +23,23 @@ router.get('/idTokens/:id', (req, res, next) => {
    	})
 });
 
+router.get('/usernames/:username', (req, res, next) => {
+	Users.getAllWithUsername(req.params.username).then((result) => {
+		result.length === 0 ? res.status(200).json({}) : res.status(200).json(result);
+	});
+});
+
 router.put('/:id/updateInfo', (req, res, next) => {
-	Users.updateNameForId(req.params.id, req.body.name).then((result) => {
-		res.status(200).end();
-	})
+	if (req.body.name) {
+		Users.updateNameForId(req.params.id, req.body.name).then((result) => {
+			res.status(200).end();
+		})
+	}
+	else if (req.body.description) {
+		Users.updateDescriptionForId(req.params.id, req.body.description).then((result) => {
+			res.status(200).end();	
+		})	
+	}
 });
 
 export default router;

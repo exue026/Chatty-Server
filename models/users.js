@@ -15,14 +15,19 @@ const getForUid = (uid) => {
     return dbManager.query(sql);
 }
 
-const updateNameForUid = (uid, name) => {
-    let sql = `UPDATE users SET name = '${name}', updated_at = NOW() WHERE uid = '${uid}'`; 
-    return dbManager.query(sql);
-}
+const getAllWithUsername = (username) => {
+	let sql = `SELECT * FROM users WHERE username LIKE '${username}%'`;
+	return dbManager.query(sql);
+};
 
 const updateNameForId = (userId, name) => {
 	let sql = `UPDATE users SET name = '${name}', updated_at = NOW() WHERE id = '${userId}'`; 
     return dbManager.query(sql);
+}
+
+const updateDescriptionForId = (userId, description) => {
+	let sql = `UPDATE users SET description = '${description}', updated_at = NOW() WHERE id = '${userId}'`
+	return dbManager.query(sql);
 }
 
 const removeForUid = (uid) => {
@@ -34,7 +39,8 @@ export default {
     create,
     getForId,
     getForUid,
+    getAllWithUsername,
     updateNameForId,
-    updateNameForUid,
+    updateDescriptionForId,
     removeForUid
 };
