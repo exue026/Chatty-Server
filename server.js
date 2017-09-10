@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 
 import api from './routes/api'
-import controllers from './routes/controllers';
 
 import config from './config';
 
@@ -25,7 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.use('/api', api);
-app.use('/controllers', controllers);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

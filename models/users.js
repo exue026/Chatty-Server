@@ -18,7 +18,12 @@ const getForUid = (uid) => {
 const getAllWithUsername = (username) => {
 	let sql = `SELECT * FROM users WHERE username LIKE '${username}%'`;
 	return dbManager.query(sql);
-};
+}
+
+const getAllForUserIds = (userIds) => {
+	let sql = `SELECT * FROM users WHERE id IN ${userIds}`;
+	return dbManager.query(sql);
+}
 
 const updateNameForId = (userId, name) => {
 	let sql = `UPDATE users SET name = '${name}', updated_at = NOW() WHERE id = '${userId}'`; 
@@ -40,7 +45,8 @@ export default {
     getForId,
     getForUid,
     getAllWithUsername,
+    getAllForUserIds,
     updateNameForId,
     updateDescriptionForId,
-    removeForUid
+    removeForUid,
 };

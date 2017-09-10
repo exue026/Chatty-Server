@@ -17,7 +17,7 @@ router.get('/idTokens/:id', (req, res, next) => {
    		return Users.getForUid(uid); 
     }).then((result) => {
    		let user = result[0];	
-   		res.json(user);
+   		res.status(200).json(user);
    	}).catch((error) => {
    		next(error);	
    	})
