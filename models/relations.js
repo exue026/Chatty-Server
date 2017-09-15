@@ -11,7 +11,7 @@ const insertPendingRequestForUsers = (userId1, userId2, actionUserId) => {
 }
 
 const getAllContactsForUserId = (userId) => {
-	let sql = `SELECT * FROM relations WHERE (user_one_id = '${userId}' OR user_two_id = '${userId}') AND status = 1`
+	let sql = `SELECT * FROM relations WHERE (user_one_id = '${userId}' OR user_two_id = '${userId}') AND (status = 0 OR status = 1)`;
 	return dbManager.query(sql);
 }
 
