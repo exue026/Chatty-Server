@@ -6,7 +6,7 @@ const create = (userId, postHead, postBody) => {
 };
 
 const getPostsForIds = (ids) => {
-	let sql = `SELECT * FROM posts WHERE user_Id in ${ids}`;
+	let sql = `SELECT * FROM posts WHERE user_Id in ${ids} ORDER BY id DESC`;
 	return dbManager.query(sql);
 };
 
