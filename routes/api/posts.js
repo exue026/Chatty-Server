@@ -7,7 +7,6 @@ var router = Express.Router();
 
 router.put('/users/:id', (req, res, next) => {
 	Posts.create(req.params.id, req.body.head, req.body.body).then((result) => {
-		console.log(result);	
 		res.status(200).end();
 	});
 });

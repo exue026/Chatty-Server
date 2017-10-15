@@ -18,9 +18,13 @@ router.put('/update', (req, res, next) => {
 });
 
 router.get('/:id/contacts', (req, res, next) => {
-	let relations = null;
+	let relations = undefined;
 	Relations.getAllContactsForUserId(req.params.id)
 	.then((result) => {
+		if (result.length == 0) {
+			res.status(200).json([]);
+			return;
+		}
 		let listOfContactIds = Controller.getSQLofContactsForRelations(req.params.id, result);
 		relations = result;
 		return Users.getAllForUserIds(listOfContactIds)	

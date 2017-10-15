@@ -15,8 +15,8 @@ const getForUid = (uid) => {
     return dbManager.query(sql);
 }
 
-const getAllWithUsername = (username) => {
-	let sql = `SELECT * FROM users WHERE username LIKE '${username}%'`;
+const getAllWithUsername = (userId, username) => {
+	let sql = `SELECT * FROM users WHERE username LIKE '${username}%' AND id <> ${userId}`;
 	return dbManager.query(sql);
 }
 

@@ -1,5 +1,6 @@
 import Express from 'express';
 import Users from '../../models/users';
+import Relations from '../../models/relations';
 import FirebaseAdmin from '../../util/firebase';
 
 var router = Express.Router();
@@ -23,9 +24,25 @@ router.get('/idTokens/:id', (req, res, next) => {
    	})
 });
 
-router.get('/usernames/:username', (req, res, next) => {
-	Users.getAllWithUsername(req.params.username).then((result) => {
-		result.length === 0 ? res.status(200).json({}) : res.status(200).json(result);
+router.get('/:id/usernames/:username', (req, res, next) => {
+	let userId = req.params.id;
+	let targetUsername = req.params.username;
+	Users.getAllWithUsername(userId, targetUsername).then((result) => {
+		let id1 = -1;
+		let id2 = -1;
+		let promises = result.map((targetUser) => {
+			id1 = userId > targetUser.id? targetUser.id : userId;
+			id2 = userId > targetUser.id? userId : targetUser.id;
+			return Relations.getStatusForUsersWithIds(id1, id2).then((status) => {
+				if (status.length > 0) {
+					targetUser.statusCode = status[0].status;
+				}
+				return targetUser;
+			});
+		});
+		Promise.all(promises).then((results) => {
+			result.length === 0 ? res.status(200).json({}) : res.status(200).json(results);
+		})
 	});
 });
 
