@@ -29,6 +29,7 @@ router.get('/:id/contacts', (req, res, next) => {
 		relations = result;
 		return Users.getAllForUserIds(listOfContactIds)	
 	}).then((result) => {
+		if (result == null) { return; }
 		let contacts = Controller.format(result, relations);
 		res.status(200).json(contacts);
 	});

@@ -14,6 +14,10 @@ router.put('/users/:id', (req, res, next) => {
 router.get('/users/:id', (req, res, next) => {
 	let userId = req.params.id;
 	Relations.getAllContactsForUserId(userId).then((result) => {
+		if (result.length == 0) {
+			res.status(200).json([]);
+			return;
+		}
 		let contacts = Controller.getSQLofContactsForRelations(userId, result);
 		contacts = contacts.substring(0, 1) + userId + ',' + contacts.substring(1);
 		Posts.getPostsForIds(contacts)

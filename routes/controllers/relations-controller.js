@@ -18,6 +18,7 @@ const getSQLofContactsForRelations = (userId, relationsArr) => {
 };
 
 const format = (contacts, relations) => {
+	console.log('hi');
 	contacts = contacts.sort((c1, c2) => {
 		return relations.find((rel) => { return c1.id === rel.user_one_id || c1.id === rel.user_two_id }).status - relations.find((rel) => { return c2.id === rel.user_one_id || c2.id === rel.user_two_id }).status;
 	});
